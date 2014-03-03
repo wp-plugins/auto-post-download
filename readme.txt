@@ -27,7 +27,8 @@ Provide to your users easy way of downloading posts.
 <p>Use the automatic plugin installer of your WordPress admin, or do it manually:</p>
 1. Upload the `auto-post-download` directory to the `/wp-content/plugins/` directory
 1. Activate the plugin through the 'Plugins' menu in WordPress
-1. Select desire categories under the 'Settings/Auto Post Download' menu.
+1. (Optionally) Select desire categories under the 'Settings/Auto Post Download' menu.
+1. (Optionally) Select desire Custom Fields under the 'Settings/Auto Post Download' menu.
 
 == Changelog ==
 
