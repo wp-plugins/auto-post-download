@@ -78,6 +78,14 @@ class APD_Settings
 		'apd_settings_admin', // Page
 		'setting_section_id' // Section
 		);
+
+		add_settings_field(
+		'apd_meta', // ID
+		__("Custom fields: ", 'apd_auto-post-download' ), // Title
+		array( $this, 'meta_array_callback' ), // Callback
+		'apd_settings_admin', // Page
+		'setting_section_id' // Section
+		);
 	}
 
 	/**
@@ -111,6 +119,32 @@ class APD_Settings
 				?>
 </select>
 <?php 
+	}
+
+	public function meta_array_callback()
+	{
+		?>
+<select size="20" name="apd_options[apd_meta][]" multiple="multiple">
+	<?php 
+	$list_of_meta = $this->get_all_meta();
+
+	$i = 0;
+	foreach ($list_of_meta as $meta) {
+		$meta = $meta[0];
+		$option = '<option value="' . $meta . '" ' . ((in_array($meta, $this->options['apd_meta'])) ? 'selected="selected"' : '') . '>';
+		$option .= $meta;
+		$option .= '</option>';
+		echo $option;
+	}
+	?>
+</select>
+<?php 
+	}
+
+	private function get_all_meta(){
+		global $wpdb;
+		$data = $wpdb->get_results("SELECT meta_key FROM $wpdb->postmeta group by meta_key order by meta_key", ARRAY_N);
+		return $data;
 	}
 }
 
