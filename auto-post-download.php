@@ -2,7 +2,7 @@
 /*
 Plugin Name: Auto Post Download
 Description: Plugin that automaticly create attachment with post content and image
-Version: 1.0
+Version: 1.1
 Author: Maciej Kopeć
 Author URI: http://maciejkopec.pl
 License: GPL2
