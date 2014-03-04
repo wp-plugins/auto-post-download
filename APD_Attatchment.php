@@ -9,7 +9,7 @@ class APD_Attatchment {
 	private $zipFile;
 	private $zipArchive;
 	private $options;
-	
+
 	function __construct($postId){
 		$this->postId = $postId;
 		$this->post = get_post($this->postId);
@@ -34,23 +34,46 @@ class APD_Attatchment {
 		if (!$this->zipArchive->open($this->zipFile, ZIPARCHIVE::OVERWRITE))
 			die("Failed to create archive\n");
 
-		$meta_list = $this->options['apd_meta'];
-		
 		$this->zipArchive->addFile(WP_CONTENT_DIR . "/uploads/" . $this->image['file'], "image." . wp_check_filetype(basename($this->image['file']))['ext']);
-		
-		$content = null;
-		
-		foreach($meta_list as $meta){
-			$content .= get_post_meta($this->postId, $meta, true);
+
+		if($this->options['apd_format'] == null || $this->options['apd_format'] == 'html'){
+			$this->zipArchive->addFromString("content.html", $this->generateHTMLContent());
+		} else {
+			$this->zipArchive->addFromString("content.txt", $this->generatePlainContent());
 		}
-		
-		$content .= $this->post->post_content;		
-		$this->zipArchive->addFromString("content.html", $content);
 
 		if (!$zipArchive->status == ZIPARCHIVE::ER_OK)
 			echo "Failed to write local files to zip\n";
 
 		$this->zipArchive->close();
+	}
+
+	private function generateHTMLContent(){
+		$content = '<!DOCTYPE html><html lang="en"><head><meta charset=utf-8 /><title></title></head><body>';
+		
+		$meta_list = $this->options['apd_meta'];
+		
+		foreach($meta_list as $meta){
+			$content .= get_post_meta($this->postId, $meta, true);
+		}
+		
+		$content .= $this->post->post_content . '</body></html>';
+		
+		return $content;
+	}
+
+	private function generatePlainContent(){
+		$content = null;
+		
+		$meta_list = $this->options['apd_meta'];
+		
+		foreach($meta_list as $meta){
+			$content .= wp_strip_all_tags(get_post_meta($this->postId, $meta, true));
+		}
+		
+		$content .= wp_strip_all_tags($this->post->post_content);
+		
+		return $content;
 	}
 
 	private function generateAttachment(){

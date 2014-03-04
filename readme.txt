@@ -3,7 +3,7 @@ Contributors: MicNeo
 Tags: auto, download, post, attachment, presspack, mediapack, pack, custom, fields
 Requires at least: 3.0.1
 Tested up to: 3.8.1
-Stable tag: 1.1
+Stable tag: 1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -15,6 +15,7 @@ Provide to your users easy way of downloading posts.
 <p>Plugin automatically generates attachment for post while you're publish it. It's totally automatic, you just need to use shortcode (or php function) to print URL.</p>
 <p>Attachments are manageable via Wordpress Media Library. You can specify for which categories auto attachments should be created.</p>
 <p>You can also define Custom Fields which will be included in generated attachment.</p>
+<p>Generated content file can be in HTML format or just plain text. Feel free to choose your format from settings!</p>
 
 == Usage ==
 * Just put `[auto-post-download]` wherever you want to display URL to post's attachment.
@@ -31,6 +32,9 @@ Provide to your users easy way of downloading posts.
 1. (Optionally) Select desire Custom Fields under the 'Settings/Auto Post Download' menu.
 
 == Changelog ==
+
+= 1.2 =
+* New feature: Now plugin supports not only HTML format but also plain text. You can choose format from settings menu.
 
 = 1.1 =
 * New feature: Now plugin supports fetching information from custom fields! Just select custom fields from plugin's settings and content of those custom fields will be automaticly added to attachment.

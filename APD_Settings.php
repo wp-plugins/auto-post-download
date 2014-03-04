@@ -63,20 +63,42 @@ class APD_Settings
 		'apd_options', // Option name
 		array( $this, 'sanitize' ) // Sanitize
 		);
-
+		
 		add_settings_section(
-		'setting_section_id', // ID
+		'setting_format_section_id', // ID
 		__( 'Auto Post Download Settings', 'apd_auto-post-download' ) , // Title
-		array( $this, 'print_section_info' ), // Callback
+		array( $this, 'print_format_section_info' ), // Callback
 		'apd_settings_admin' // Page
 		);
 
+		add_settings_section(
+		'setting_cats_section_id', // ID
+		__( 'Categories', 'apd_auto-post-download' ) , // Title
+		array( $this, 'print_cats_section_info' ), // Callback
+		'apd_settings_admin' // Page
+		);
+		
+		add_settings_section(
+		'setting_custom_fields_section_id', // ID
+		__('Custom fields', 'apd_auto-post-download' ), // Title
+		array( $this, 'print_custom_fields_section_info' ), // Callback
+		'apd_settings_admin' // Page
+		);
+
+		add_settings_field(
+		'apd_format', // ID
+		__("Format: ", 'apd_auto-post-download' ), // Title
+		array( $this, 'format_callback' ), // Callback
+		'apd_settings_admin', // Page
+		'setting_format_section_id' // Section
+		);
+		
 		add_settings_field(
 		'apd_cats', // ID
 		__("Categories: ", 'apd_auto-post-download' ), // Title
 		array( $this, 'cats_array_callback' ), // Callback
 		'apd_settings_admin', // Page
-		'setting_section_id' // Section
+		'setting_cats_section_id' // Section
 		);
 
 		add_settings_field(
@@ -84,7 +106,7 @@ class APD_Settings
 		__("Custom fields: ", 'apd_auto-post-download' ), // Title
 		array( $this, 'meta_array_callback' ), // Callback
 		'apd_settings_admin', // Page
-		'setting_section_id' // Section
+		'setting_custom_fields_section_id' // Section
 		);
 	}
 
@@ -98,8 +120,16 @@ class APD_Settings
 		return $input;
 	}
 
-	public	function print_section_info(){
+	public	function print_cats_section_info(){
 		echo __("Choose categories of posts for which post pack should be generated.", 'apd_auto-post-download');
+	}
+	
+	public	function print_format_section_info(){
+		echo __("Choose in which format content of post should be generated, by default: html.", 'apd_auto-post-download');
+	}
+	
+	public	function print_custom_fields_section_info(){
+		echo __("Choose custom fields which should be included in content of generated attachment.", 'apd_auto-post-download');
 	}
 
 	public function cats_array_callback()
@@ -146,6 +176,18 @@ class APD_Settings
 		$data = $wpdb->get_results("SELECT meta_key FROM $wpdb->postmeta group by meta_key order by meta_key", ARRAY_N);
 		return $data;
 	}
+	
+	public function format_callback()
+	{
+		$format = $this->options['apd_format'];		
+		?>
+		<label for="html_format"><?php _e('HTML', 'apd_auto-post-download' ); ?></label>
+		<input id="html_format" type="radio" name="apd_options[apd_format]" value="html" <?php echo ($format == "html" || $format==null) ? 'checked="checked"' : ""; ?> />
+		<label for="plain_format"><?php _e('Plain text', 'apd_auto-post-download' ); ?></label>
+		<input id="plain_format" type="radio" name="apd_options[apd_format]" value="text" <?php echo ($format == "text") ? 'checked="checked"' : ""; ?> />
+		<?php 
+	}
+	
 }
 
 ?>
