@@ -70,6 +70,13 @@ class APD_Settings
 		array( $this, 'print_format_section_info' ), // Callback
 		'apd_settings_admin' // Page
 		);
+		
+		add_settings_section(
+		'setting_content_section_id', // ID
+		__( 'Auto Post Download Settings', 'apd_auto-post-download' ) , // Title
+		array( $this, 'print_content_section_info' ), // Callback
+		'apd_settings_admin' // Page
+		);
 
 		add_settings_section(
 		'setting_cats_section_id', // ID
@@ -91,6 +98,14 @@ class APD_Settings
 		array( $this, 'format_callback' ), // Callback
 		'apd_settings_admin', // Page
 		'setting_format_section_id' // Section
+		);
+		
+		add_settings_field(
+		'apd_format', // ID
+		__("Format: ", 'apd_auto-post-download' ), // Title
+		array( $this, 'content_callback' ), // Callback
+		'apd_settings_admin', // Page
+		'setting_content_section_id' // Section
 		);
 		
 		add_settings_field(
@@ -126,6 +141,10 @@ class APD_Settings
 	
 	public	function print_format_section_info(){
 		echo __("Choose in which format content of post should be generated, by default: html.", 'apd_auto-post-download');
+	}
+	
+	public	function print_content_section_info(){
+		echo __("Choose what should be included in generated archive (post content or it's image), by default: both.", 'apd_auto-post-download');
 	}
 	
 	public	function print_custom_fields_section_info(){
@@ -177,16 +196,29 @@ class APD_Settings
 		return $data;
 	}
 	
-	public function format_callback()
+public function format_callback()
 	{
 		$format = $this->options['apd_format'];		
 		?>
-		<label for="html_format"><?php _e('HTML', 'apd_auto-post-download' ); ?></label>
-		<input id="html_format" type="radio" name="apd_options[apd_format]" value="html" <?php echo ($format == "html" || $format==null) ? 'checked="checked"' : ""; ?> />
-		<label for="plain_format"><?php _e('Plain text', 'apd_auto-post-download' ); ?></label>
-		<input id="plain_format" type="radio" name="apd_options[apd_format]" value="text" <?php echo ($format == "text") ? 'checked="checked"' : ""; ?> />
+			<label for="html_format"><?php _e('HTML', 'apd_auto-post-download' ); ?></label>
+			<input id="html_format" type="radio" name="apd_options[apd_format]" value="html" <?php echo ($format == "html" || $format==null) ? 'checked="checked"' : ""; ?> />
+			<label for="plain_format"><?php _e('Plain text', 'apd_auto-post-download' ); ?></label>
+			<input id="plain_format" type="radio" name="apd_options[apd_format]" value="text" <?php echo ($format == "text") ? 'checked="checked"' : ""; ?> />
 		<?php 
 	}
+	
+	public function content_callback()
+	{
+		$content = $this->options['apd_content'];
+		?>
+			<label for="both_content"><?php _e('Both', 'apd_auto-post-download' ); ?></label>
+			<input id="both_content" type="radio" name="apd_options[apd_content]" value="both" <?php echo ($content == "both" || $content==null) ? 'checked="checked"' : ""; ?> />
+			<label for="text_content"><?php _e('Content only', 'apd_auto-post-download' ); ?></label>
+			<input id="text_content" type="radio" name="apd_options[apd_content]" value="text" <?php echo ($content == "text") ? 'checked="checked"' : ""; ?> />
+			<label for="image_format"><?php _e('Image only', 'apd_auto-post-download' ); ?></label>
+			<input id="image_format" type="radio" name="apd_options[apd_content]" value="image" <?php echo ($content == "image") ? 'checked="checked"' : ""; ?> />
+			<?php 
+		}
 	
 }
 

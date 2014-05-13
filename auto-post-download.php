@@ -1,9 +1,9 @@
 <?php
 /*
-Plugin Name: Auto Post Download
+ Plugin Name: Auto Post Download
 Description: Plugin that automaticly create attachment with post content and image
-Version: 1.3
-Author: Maciej KopeÄ‡
+Version: 1.3.1
+Author: Maciej Kopeæ
 Author URI: http://maciejkopec.pl
 License: GPL2
 */
@@ -23,7 +23,8 @@ if (!defined('APD_PLUGIN_URL'))
 
 
 function apd_generate_attachment($post_id) {
-	(new APD_Attatchment($post_id))->generate();
+	$attachment = new APD_Attatchment($post_id);
+	$attachment->generate();
 }
 add_action('publish_post', 'apd_generate_attachment' );
 

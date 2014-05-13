@@ -2,8 +2,8 @@
 Contributors: MicNeo
 Tags: auto, download, post, attachment, presspack, mediapack, pack, custom, fields
 Requires at least: 3.0.1
-Tested up to: 3.9.1
-Stable tag: 1.3
+Tested up to: 3.8.1
+Stable tag: 1.3.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -32,6 +32,9 @@ Provide to your users easy way of downloading posts.
 1. (Optionally) Select desire Custom Fields under the 'Settings/Auto Post Download' menu.
 
 == Changelog ==
+
+= 1.3.1 =
+* Fix: Compability for older version of PHP
 
 = 1.3 =
 * New feature: You can choose if you want to include both, content and post's image, or only content or only image. You can change this option from settings menu.
