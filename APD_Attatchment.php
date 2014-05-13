@@ -31,11 +31,15 @@ class APD_Attatchment {
 	}
 
 	private function generateZipFile(){
-		if (!$this->zipArchive->open($this->zipFile, ZIPARCHIVE::OVERWRITE))
+		if (!$this->zipArchive->open($this->zipFile, ZIPARCHIVE::OVERWRITE)){
 			die("Failed to create archive\n");
-
-		$this->zipArchive->addFile(WP_CONTENT_DIR . "/uploads/" . $this->image['file'], "image." . wp_check_filetype(basename($this->image['file']))['ext']);
-
+		}
+		
+		// do we have image attached to this post?
+		if(is_array($this->image)){
+			$this->zipArchive->addFile(WP_CONTENT_DIR . "/uploads/" . $this->image['file'], "image." . wp_check_filetype(basename($this->image['file']))['ext']);
+		}
+		
 		if($this->options['apd_format'] == null || $this->options['apd_format'] == 'html'){
 			$this->zipArchive->addFromString("content.html", $this->generateHTMLContent());
 		} else {

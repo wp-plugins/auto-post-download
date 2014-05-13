@@ -10,7 +10,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Provide to your users easy way of downloading posts. 
 
 == Description ==
-<p>Auto Post Download plugin provides easy way to generating ZIP files with post content and post's image.</p>
+<p>Auto Post Download plugin provides easy way to generating ZIP files with post content and post's image. You can choose if you want to include both files in archive or only one of them (content or image).</p>
 <p>With this plugin you will be able to provide URL for your users to download posts as a ZIP file. You need a press pack? This plugin will make it very easy.</p>
 <p>Plugin automatically generates attachment for post while you're publish it. It's totally automatic, you just need to use shortcode (or php function) to print URL.</p>
 <p>Attachments are manageable via Wordpress Media Library. You can specify for which categories auto attachments should be created.</p>
@@ -33,6 +33,10 @@ Provide to your users easy way of downloading posts.
 
 == Changelog ==
 
+= 1.3 =
+* New feature: You can choose if you want to include both, content and post's image, or only content or only image. You can change this option from settings menu.
+* Fix: "Warning: Illegal string offset 'file' in APD_Attatchment.php". Plugin doesn't force user to use image in posts.
+ 
 = 1.2 =
 * New feature: Now plugin supports not only HTML format but also plain text. You can choose format from settings menu.
 
