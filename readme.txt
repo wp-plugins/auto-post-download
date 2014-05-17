@@ -3,7 +3,7 @@ Contributors: MicNeo
 Tags: auto, download, post, attachment, presspack, mediapack, pack, custom, fields
 Requires at least: 3.0.1
 Tested up to: 3.8.1
-Stable tag: 1.3.1
+Stable tag: 1.3.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -32,6 +32,9 @@ Provide to your users easy way of downloading posts.
 1. (Optionally) Select desire Custom Fields under the 'Settings/Auto Post Download' menu.
 
 == Changelog ==
+
+= 1.3.2 =
+* Fix: Fix for options page
 
 = 1.3.1 =
 * Fix: Compability for older version of PHP

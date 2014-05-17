@@ -5,7 +5,9 @@ class APD_Settings
 	 * Holds the values to be used in the fields callbacks
 	 */
 	private $options;
-
+	private $selected_cats;
+	private $selected_custom_fields;
+	
 	/**
 	 * Start up
 	 */
@@ -13,6 +15,10 @@ class APD_Settings
 	{
 		add_action( 'admin_menu', array( $this, 'add_plugin_page' ) );
 		add_action( 'admin_init', array( $this, 'page_init' ) );
+		// Set class property
+		$this->options = get_option( 'apd_options' );
+		$this->selected_cats = (($this->options['apd_cats'] == null) ? array() : $this->options['apd_cats']);
+		$this->selected_custom_fields = (($this->options['apd_meta'] == null) ? array() : $this->options['apd_meta']);
 	}
 
 	/**
@@ -34,8 +40,7 @@ class APD_Settings
 	 */
 	public function create_admin_page()
 	{
-		// Set class property
-		$this->options = get_option( 'apd_options' );
+		
 		?>
 <div class="wrap">
 	<h2>
@@ -157,9 +162,9 @@ class APD_Settings
 <select size="20" name="apd_options[apd_cats][]" multiple="multiple">
 	<?php 
 	$categories = get_categories();
-	$i = 0;
+	
 	foreach ($categories as $category) {
-			  		$option = '<option value="' .$category->term_id . '" ' . ((in_array($category->term_id, $this->options['apd_cats'])) ? 'selected="selected"' : '') . '>';
+			  		$option = '<option value="' .$category->term_id . '" ' . ((in_array($category->term_id, $this->selected_cats)) ? 'selected="selected"' : '') . '>';
 			  		$option .= $category->cat_name;
 			  		$option .= ' ('.$category->category_count.')';
 			 	 	$option .= '</option>';
@@ -176,11 +181,10 @@ class APD_Settings
 <select size="20" name="apd_options[apd_meta][]" multiple="multiple">
 	<?php 
 	$list_of_meta = $this->get_all_meta();
-
-	$i = 0;
+	
 	foreach ($list_of_meta as $meta) {
 		$meta = $meta[0];
-		$option = '<option value="' . $meta . '" ' . ((in_array($meta, $this->options['apd_meta'])) ? 'selected="selected"' : '') . '>';
+		$option = '<option value="' . $meta . '" ' . ((in_array($meta, $this->selected_custom_fields)) ? 'selected="selected"' : '') . '>';
 		$option .= $meta;
 		$option .= '</option>';
 		echo $option;
