@@ -61,7 +61,16 @@ class APD_Attatchment {
 		$meta_list = $this->options['apd_meta'];
 
 		foreach($meta_list as $meta){
-			$content .= get_post_meta($this->postId, $meta, true);
+			$content .= '<p>';
+			
+			if($this->options['apd_meta_title'] == true){
+					$content .= '<b>' . $meta . ':</b> ';
+			}
+			
+			$content .=  get_post_meta($this->postId, $meta, true) . '</p>';
+			
+			$content .= '<hr/>';
+			
 		}
 
 		$content .= $this->post->post_content . '</body></html>';
@@ -74,8 +83,13 @@ class APD_Attatchment {
 
 		$meta_list = $this->options['apd_meta'];
 
-		foreach($meta_list as $meta){
+		foreach($meta_list as $meta){			
+			if($this->options['apd_meta_title'] == true){
+				$content .= $meta . ': ';
+			}			
+			
 			$content .= wp_strip_all_tags(get_post_meta($this->postId, $meta, true));
+			$content .= '------';
 		}
 
 		$content .= wp_strip_all_tags($this->post->post_content);

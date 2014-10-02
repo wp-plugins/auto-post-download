@@ -122,12 +122,21 @@ class APD_Settings
 		);
 
 		add_settings_field(
+		'apd_meta_title', // ID
+		__("Show custom fields titles: ", 'apd_auto-post-download' ), // Title
+		array( $this, 'meta_title_callback' ), // Callback
+		'apd_settings_admin', // Page
+		'setting_custom_fields_section_id' // Section
+		);
+		
+		add_settings_field(
 		'apd_meta', // ID
 		__("Custom fields: ", 'apd_auto-post-download' ), // Title
 		array( $this, 'meta_array_callback' ), // Callback
 		'apd_settings_admin', // Page
 		'setting_custom_fields_section_id' // Section
 		);
+		
 	}
 
 	/**
@@ -175,6 +184,14 @@ class APD_Settings
 <?php 
 	}
 
+	public function meta_title_callback()
+	{
+			$checked = ($this->options['apd_meta_title'] == true) ? "checked='checked'" : "";
+		?>
+<input type="checkbox" name="apd_options[apd_meta_title]"  value="<?php echo $this->options['apd_meta_title']; ?>" <?php echo $checked; ?> />						
+		<?php
+	}
+	
 	public function meta_array_callback()
 	{
 		?>
