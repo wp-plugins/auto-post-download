@@ -188,7 +188,7 @@ class APD_Settings
 	{
 			$checked = ($this->options['apd_meta_title'] == true) ? "checked='checked'" : "";
 		?>
-<input type="checkbox" name="apd_options[apd_meta_title]"  value="<?php echo $this->options['apd_meta_title']; ?>" <?php echo $checked; ?> />						
+<input type="checkbox" name="apd_options[apd_meta_title]"  value="true" <?php echo $checked; ?> />						
 		<?php
 	}
 	
