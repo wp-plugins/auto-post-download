@@ -3,7 +3,7 @@ Contributors: MicNeo
 Tags: auto, download, post, attachment, presspack, mediapack, pack, custom, fields
 Requires at least: 3.0.1
 Tested up to: 4.0
-Stable tag: 1.4
+Stable tag: 1.4.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -32,6 +32,9 @@ Provide to your users easy way of downloading posts.
 1. (Optionally) Select desire Custom Fields under the 'Settings/Auto Post Download' menu.
 
 == Changelog ==
+
+= 1.4.1 =
+* Fix: There was issue with updating post with custom fields. In that case, new values of custom fields wasn't saved, it had to be saved twice. Now it works fine.
 
 = 1.4 =
 * New feature: Now you can decide if you want to include custom field title in content of generated attachment. You can set it in settings of the plugin.
